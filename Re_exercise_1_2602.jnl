@@ -1,0 +1,1765 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=200.0)
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0, 0), point2=(
+    0.009054, 0.0009567))
+mdb.models['Model-1'].Part(dimensionality=TWO_D_PLANAR, name='RVE', type=
+    DEFORMABLE_BODY)
+mdb.models['Model-1'].parts['RVE'].BaseShell(sketch=
+    mdb.models['Model-1'].sketches['__profile__'])
+del mdb.models['Model-1'].sketches['__profile__']
+mdb.models['Model-1'].ConstrainedSketch(gridSpacing=4.48, name='__profile__', 
+    sheetSize=179.46)
+mdb.models['Model-1'].parts['RVE'].projectReferencesOntoSketch(filter=
+    COPLANAR_EDGES, sketch=mdb.models['Model-1'].sketches['__profile__'])
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0, 0), point2=(
+    0.00677025, 0.000225675))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.00679725, 0), 
+    point2=(0.009054, 0.000225675))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0, 0.000252675)
+    , point2=(0.00225675, 0.000704025))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.00228375, 
+    0.000252675), point2=(0.009054, 0.000704025))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.0, 
+    0.000731025), point2=(0.00677025, 0.0009567))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.00679725, 
+    0.000731025), point2=(0.009054, 0.0009567))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.0, 
+    0.000225675), point2=(0.009054, 0.000252675))
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0, 0.000704025)
+    , point2=(0.009054, 0.000731025))
+mdb.models['Model-1'].parts['RVE'].PartitionFaceBySketch(faces=
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#1 ]', ), )
+    , sketch=mdb.models['Model-1'].sketches['__profile__'])
+del mdb.models['Model-1'].sketches['__profile__']
+mdb.models['Model-1'].Material(name='Platelet')
+mdb.models['Model-1'].materials['Platelet'].Elastic(table=((100000.0, 0.2), ))
+mdb.models['Model-1'].Material(name='Matrix')
+mdb.models['Model-1'].materials['Matrix'].Elastic(table=((136.0, 68.0, 68.0), )
+    , type=TRACTION)
+mdb.models['Model-1'].materials['Matrix'].QuadsDamageInitiation(table=((1.76, 
+    1.76, 1.76), ))
+mdb.models['Model-1'].materials['Matrix'].quadsDamageInitiation.DamageEvolution(
+    softening=TABULAR, table=((0.0, 0.0), (0.112343312, 1.04e-07), (
+    0.201993954, 2.08e-07), (0.275196878, 3.11e-07), (0.33609812, 4.15e-07), (
+    0.38755825, 5.19e-07), (0.43161473, 6.23e-07), (0.469758099, 7.26e-07), (
+    0.503103949, 8.3e-07), (0.532503844, 9.34e-07), (0.558619071, 1.04e-06), (
+    0.58197097, 1.14e-06), (0.602976096, 1.25e-06), (0.621971286, 1.35e-06), (
+    0.639231857, 1.45e-06), (0.654985039, 1.56e-06), (0.669420035, 1.66e-06), (
+    0.682695653, 1.76e-06), (0.694946177, 1.87e-06), (0.706285926, 1.97e-06), (
+    0.716812827, 2.08e-06), (0.726611254, 2.18e-06), (0.735754297, 2.28e-06), (
+    0.744305582, 2.39e-06), (0.752320758, 2.49e-06), (0.759848708, 2.59e-06), (
+    0.766932548, 2.7e-06), (0.773610453, 2.8e-06), (0.779916342, 2.91e-06), (
+    0.785880461, 3.01e-06), (0.791529861, 3.11e-06), (0.796888814, 3.22e-06), (
+    0.801979155, 3.32e-06), (0.806820588, 3.42e-06), (0.811430934, 3.53e-06), (
+    0.815826352, 3.63e-06), (0.820021528, 3.74e-06), (0.824029843, 3.84e-06), (
+    0.827863508, 3.94e-06), (0.831533695, 4.05e-06), (0.835050642, 4.15e-06), (
+    0.838423751, 4.26e-06), (0.841661668, 4.36e-06), (0.844772362, 4.46e-06), (
+    0.847763187, 4.57e-06), (0.850640939, 4.67e-06), (0.853411913, 4.77e-06), (
+    0.856081943, 4.88e-06), (0.858656447, 4.98e-06), (0.86114046, 5.09e-06), (
+    0.925390081, 1.02e-05), (0.948991473, 1.53e-05), (0.961249453, 2.03e-05), (
+    0.968757429, 2.54e-05), (0.973828245, 3.05e-05), (0.97748288, 3.56e-05), (
+    0.980241908, 4.07e-05), (0.98239861, 4.58e-05), (0.984130817, 5.09e-05), (
+    0.985552628, 5.59e-05), (0.986740612, 6.1e-05), (0.987748068, 6.61e-05), (
+    0.988613241, 7.12e-05), (0.989364285, 7.63e-05), (0.990022385, 8.14e-05), (
+    0.990603788, 8.64e-05), (0.991121165, 9.15e-05), (0.99158454, 9.66e-05), (
+    0.992001947, 0.000101705), (0.992379905, 0.00010679), (0.992723753, 
+    0.000111875), (0.993037909, 0.000116961), (0.99332606, 0.000122046), (
+    0.993591307, 0.000127131), (0.993836275, 0.000132216), (0.994063206, 
+    0.000137302), (0.994274021, 0.000142387), (0.994470376, 0.000147472), (
+    0.994653712, 0.000152557), (0.99482528, 0.000157643), (0.994986179, 
+    0.000162728), (0.995137374, 0.000167813), (0.995279718, 0.000172898), (
+    0.995413965, 0.000177984), (0.995540786, 0.000183069), (0.995660783, 
+    0.000188154), (0.99577449, 0.000193239), (0.99588239, 0.000198325), (
+    0.995984917, 0.00020341), (0.996082462, 0.000208495), (0.99617538, 
+    0.00021358), (0.996263993, 0.000218666), (0.996348592, 0.000223751), (
+    0.996429445, 0.000228836), (0.996506794, 0.000233921), (0.996580864, 
+    0.000239007), (0.996651857, 0.000244092), (0.996726512, 0.000249469), (
+    0.996729781, 0.000249615), (0.996733047, 0.00024976), (0.996736308, 
+    0.000249906), (0.996739566, 0.000250052), (0.99674282, 0.000250198), (
+    0.99674607, 0.000250343), (0.996749317, 0.000250489), (0.996752559, 
+    0.000250635), (0.996755798, 0.000250781), (0.996759033, 0.000250926), (
+    0.996762265, 0.000251072), (0.996765492, 0.000251218), (0.996768716, 
+    0.000251364), (0.996771936, 0.00025151), (0.996775153, 0.000251655), (
+    0.996778366, 0.000251801), (0.996781575, 0.000251947), (0.99678478, 
+    0.000252093), (0.996787982, 0.000252238), (0.99679118, 0.000252384), (
+    0.996794374, 0.00025253), (0.996797565, 0.000252676), (0.996800752, 
+    0.000252821), (0.996803935, 0.000252967), (0.996807115, 0.000253113), (
+    0.996810291, 0.000253259), (0.996813463, 0.000253405), (0.996816632, 
+    0.00025355), (0.996819797, 0.000253696), (0.996822958, 0.000253842), (
+    0.996826116, 0.000253988), (0.99682927, 0.000254133), (0.996832421, 
+    0.000254279), (0.996835568, 0.000254425), (0.996838711, 0.000254571), (
+    0.996841851, 0.000254716), (0.996844988, 0.000254862), (0.99684812, 
+    0.000255008), (0.996851249, 0.000255154), (0.996854375, 0.0002553), (
+    0.996857497, 0.000255445), (0.996860615, 0.000255591), (0.99686373, 
+    0.000255737), (0.996866842, 0.000255883), (0.99686995, 0.000256028), (
+    0.996873054, 0.000256174), (0.996876155, 0.00025632), (0.997023904, 
+    0.000263463), (0.997163877, 0.000270606), (0.997296672, 0.000277748), (
+    0.997422828, 0.000284891), (0.997542829, 0.000292034), (0.997657116, 
+    0.000299177), (0.997766087, 0.000306319), (0.997870106, 0.000313462), (
+    0.997969501, 0.000320605), (0.998064574, 0.000327748), (0.998155602, 
+    0.000334891), (0.998242837, 0.000342033), (0.998326511, 0.000349176), (
+    0.998406839, 0.000356319), (0.998484016, 0.000363462), (0.998558225, 
+    0.000370604), (0.998629634, 0.000377747), (0.998698398, 0.00038489), (
+    0.998764661, 0.000392033), (0.998828558, 0.000399176), (0.998890213, 
+    0.000406318), (0.998949742, 0.000413461), (0.999007253, 0.000420604), (
+    0.999062846, 0.000427747), (0.999116618, 0.000434889), (0.999168654, 
+    0.000442032), (0.999219039, 0.000449175), (0.999267849, 0.000456318), (
+    0.999315157, 0.00046346), (0.999361032, 0.000470603), (0.999405537, 
+    0.000477746), (0.999448733, 0.000484889), (0.999490677, 0.000492032), (
+    0.999531423, 0.000499174), (0.999571021, 0.000506317), (0.999609519, 
+    0.00051346), (0.999646963, 0.000520603), (0.999683394, 0.000527745), (
+    0.999718854, 0.000534888), (0.999753381, 0.000542031), (0.999787011, 
+    0.000549174), (0.999819778, 0.000556317), (0.999851716, 0.000563459), (
+    0.999882856, 0.000570602), (0.999913227, 0.000577745), (0.999942856, 
+    0.000584888), (0.999971772, 0.00059203), (1.0, 0.000599173)), type=
+    DISPLACEMENT)
+mdb.models['Model-1'].HomogeneousSolidSection(material='Platelet', name=
+    'Platelet', thickness=None)
+mdb.models['Model-1'].CohesiveSection(initialThickness=2.7e-05, 
+    initialThicknessType=SPECIFY, material='Matrix', name='Section-2', 
+    outOfPlaneThickness=1.0, response=TRACTION_SEPARATION)
+mdb.models['Model-1'].sections.changeKey(fromName='Section-2', toName='Matrix')
+mdb.models['Model-1'].parts['RVE'].Set(faces=
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#2b5 ]', ), 
+    ), name='platelets')
+mdb.models['Model-1'].parts['RVE'].SectionAssignment(offset=0.0, offsetField=''
+    , offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1'].parts['RVE'].sets['platelets'], sectionName=
+    'Platelet', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1'].parts['RVE'].Set(faces=
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#54a ]', ), 
+    ), name='matrix')
+mdb.models['Model-1'].parts['RVE'].SectionAssignment(offset=0.0, offsetField=''
+    , offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1'].parts['RVE'].sets['matrix'], sectionName='Matrix', 
+    thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1'].rootAssembly.DatumCsysByDefault(CARTESIAN)
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='RVE-1', part=
+    mdb.models['Model-1'].parts['RVE'])
+mdb.models['Model-1'].parts['RVE'].seedEdgeBySize(constraint=FINER, 
+    deviationFactor=0.1, edges=
+    mdb.models['Model-1'].parts['RVE'].edges.getSequenceFromMask((
+    '[#4e9fd79f #3 ]', ), ), size=2.7e-05)
+mdb.models['Model-1'].parts['RVE'].seedEdgeByNumber(constraint=FINER, edges=
+    mdb.models['Model-1'].parts['RVE'].edges.getSequenceFromMask((
+    '[#b1602860 ]', ), ), number=1)
+mdb.models['Model-1'].parts['RVE'].setMeshControls(elemShape=QUAD, regions=
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#2b5 ]', ), 
+    ), technique=STRUCTURED)
+mdb.models['Model-1'].parts['RVE'].setMeshControls(elemShape=QUAD, regions=
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#54a ]', ), 
+    ), technique=SWEEP)
+mdb.models['Model-1'].parts['RVE'].setSweepPath(edge=
+    mdb.models['Model-1'].parts['RVE'].edges[6], region=
+    mdb.models['Model-1'].parts['RVE'].faces[1], sense=REVERSE)
+mdb.models['Model-1'].parts['RVE'].setSweepPath(edge=
+    mdb.models['Model-1'].parts['RVE'].edges[13], region=
+    mdb.models['Model-1'].parts['RVE'].faces[3], sense=REVERSE)
+mdb.models['Model-1'].parts['RVE'].setSweepPath(edge=
+    mdb.models['Model-1'].parts['RVE'].edges[21], region=
+    mdb.models['Model-1'].parts['RVE'].faces[6], sense=REVERSE)
+mdb.models['Model-1'].parts['RVE'].setSweepPath(edge=
+    mdb.models['Model-1'].parts['RVE'].edges[28], region=
+    mdb.models['Model-1'].parts['RVE'].faces[8], sense=REVERSE)
+mdb.models['Model-1'].parts['RVE'].setSweepPath(edge=
+    mdb.models['Model-1'].parts['RVE'].edges[29], region=
+    mdb.models['Model-1'].parts['RVE'].faces[10], sense=REVERSE)
+mdb.models['Model-1'].parts['RVE'].setElementType(elemTypes=(ElemType(
+    elemCode=CPE4R, elemLibrary=STANDARD, secondOrderAccuracy=OFF, 
+    hourglassControl=DEFAULT, distortionControl=DEFAULT), ElemType(
+    elemCode=CPE3, elemLibrary=STANDARD)), regions=(
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#2b5 ]', ), 
+    ), ))
+mdb.models['Model-1'].parts['RVE'].setElementType(elemTypes=(ElemType(
+    elemCode=COH2D4, elemLibrary=STANDARD), ElemType(elemCode=UNKNOWN_TRI, 
+    elemLibrary=STANDARD)), regions=(
+    mdb.models['Model-1'].parts['RVE'].faces.getSequenceFromMask(('[#54a ]', ), 
+    ), ))
+mdb.models['Model-1'].parts['RVE'].generateMesh()
+mdb.models['Model-1'].rootAssembly.regenerate()
+mdb.models['Model-1'].rootAssembly.Set(name='Top', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#800000a6 #ffffffff:3 #3 #0:10 #fffffff8 #ffffffff:6 #fff ]', ), ))
+mdb.models['Model-1'].rootAssembly.Set(name='Bottom', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#6600 #0:25 #fffffff0 #ffffffff:9 #ffff ]', ), ))
+mdb.models['Model-1'].rootAssembly.Set(name='Left', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#811008 #0:3 #1fc #0:20 #e0000000 #f #0:39', ' #ffff00 ]', ), ))
+mdb.models['Model-1'].rootAssembly.Set(name='Right', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#288040 #0:13 #f0000000 #7 #0:20 #7f0000 #0:19', ' #3fffc000 ]', ), 
+    ))
+# Save by Admin on 2024_02_27-10.17.07; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.saveAs(pathName='C:/Bala Bodke/D Drive/Data Recovery 30 06 2021/Personal/Academics/IIST/Abaqus_20230525/Re_exercise_1_2602')
+mdb.models['Model-1'].materials['Matrix'].quadsDamageInitiation.damageEvolution.setValues(
+    softening=LINEAR, table=((0.00074727, ), ), type=ENERGY)
+mdb.models['Model-1'].StaticStep(initialInc=0.01, maxInc=0.1, maxNumInc=1000, 
+    minInc=1e-15, name='Step-1', nlgeom=ON, previous='Initial')
+mdb.models['Model-1'].FieldOutputRequest(createStepName='Step-1', name=
+    'F-Output-2', variables=('S', 'E', 'U', 'RF', 'SDEG'))
+mdb.models['Model-1'].rootAssembly.Set(name='Bottom', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#6600 #0:29 #e0000000 #ffffffff:10 #3ff ]', ), ))
+mdb.models['Model-1'].rootAssembly.Set(name='Top', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=(
+    '[#800000a6 #ffffffff:7 #1ffffff #0:10 #f8000000 #ffffffff:2 #3fff ]', ), 
+    ))
+mdb.models['Model-1'].rootAssembly.Set(name='Left', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#811008 #0:7 #fe000000 #0:21 #1fc00000 #0:35 #3fffc000 ]', ), ))
+mdb.models['Model-1'].rootAssembly.Set(name='Right', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#288040 #0:18 #7f00000 #0:21 #1fc00 #0:20 #7fff800 ]', ), ))
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(24, 
+# Save by Admin on 2024_02_27-10.46.10; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='Model-1-bcs', objectToCopy=mdb.models['Model-1'])
+mdb.models.changeKey(fromName='Model-1-bcs', toName='Model-1-Bcs')
+mdb.models['Model-1'].rootAssembly.Set(name='PointB', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#2000 ]', ), ))
+mdb.models['Model-1-Bcs'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Bcs'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-Bcs'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Bcs'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-Bcs'].keywordBlock.insert(24, 
+# Save by Admin on 2024_02_27-12.30.00; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='Model-1-Elastic', objectToCopy=mdb.models['Model-1-Bcs'])
+del mdb.models['Model-1-Elastic'].materials['Matrix'].quadsDamageInitiation
+mdb.models['Model-1-Elastic'].materials['Matrix'].elastic.setValues(table=((
+    136.0, 0.33), ), type=ISOTROPIC)
+del mdb.models['Model-1-Elastic'].sections['Matrix']
+mdb.models['Model-1-Elastic'].HomogeneousSolidSection(material='Matrix', name=
+    'Matrix', thickness=None)
+mdb.models['Model-1-Elastic'].steps['Step-1'].setValues(nlgeom=OFF)
+mdb.models['Model-1-Elastic'].parts['RVE'].deleteMesh(regions=
+    mdb.models['Model-1-Elastic'].parts['RVE'].faces.getSequenceFromMask((
+    '[#7ff ]', ), ))
+mdb.models['Model-1-Elastic'].parts['RVE'].deleteSeeds(regions=
+    mdb.models['Model-1-Elastic'].parts['RVE'].edges.getSequenceFromMask((
+    '[#ffffffff #3 ]', ), ))
+mdb.models['Model-1-Elastic'].parts['RVE'].setMeshControls(regions=
+    mdb.models['Model-1-Elastic'].parts['RVE'].faces.getSequenceFromMask((
+    '[#54a ]', ), ), technique=STRUCTURED)
+mdb.models['Model-1-Elastic'].parts['RVE'].setElementType(elemTypes=(ElemType(
+    elemCode=CPE4R, elemLibrary=STANDARD, secondOrderAccuracy=OFF, 
+    hourglassControl=DEFAULT, distortionControl=DEFAULT), ElemType(
+    elemCode=CPE3, elemLibrary=STANDARD)), regions=(
+    mdb.models['Model-1-Elastic'].parts['RVE'].faces.getSequenceFromMask((
+    '[#54a ]', ), ), ))
+mdb.models['Model-1-Elastic'].parts['RVE'].seedEdgeBySize(constraint=FINER, 
+    deviationFactor=0.1, edges=
+    mdb.models['Model-1-Elastic'].parts['RVE'].edges.getSequenceFromMask((
+    '[#4e9fd79f #3 ]', ), ), size=2.7e-05)
+mdb.models['Model-1-Elastic'].parts['RVE'].seedEdgeByNumber(constraint=FINER, 
+    edges=mdb.models['Model-1-Elastic'].parts['RVE'].edges.getSequenceFromMask(
+    ('[#b1602860 ]', ), ), number=2)
+mdb.models['Model-1-Elastic'].parts['RVE'].generateMesh()
+mdb.models['Model-1-Elastic'].rootAssembly.regenerate()
+mdb.models['Model-1-Elastic'].rootAssembly.Set(name='Bottom', nodes=
+    mdb.models['Model-1-Elastic'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#6900 #0:21 #80000000 #0:8 #fffffffe #ffffffff:9 #3fff ]', ), ))
+mdb.models['Model-1-Elastic'].rootAssembly.Set(name='Left', nodes=
+    mdb.models['Model-1-Elastic'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#881008 #0:7 #fe000000 #0:21 #fc000000 #1 #0:12', 
+    ' #200 #0:21 #ff000080 #ff ]', ), ))
+mdb.models['Model-1-Elastic'].rootAssembly.Set(name='Top', nodes=
+    mdb.models['Model-1-Elastic'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#800000a6 #ffffffff:7 #1ffffff #0:8 #2 #0 #e0000000', 
+    ' #ffffffff:2 #ffff ]', ), ))
+mdb.models['Model-1-Elastic'].rootAssembly.Set(name='Right', nodes=
+    mdb.models['Model-1-Elastic'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#218040 #0:18 #1fc00000 #0:21 #1fc000 #0:2 #100', 
+    ' #0:17 #fffc0000 #40003 ]', ), ))
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Elastic'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Elastic'].keywordBlock.insert(12, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-Elastic'].keywordBlock.insert(23, 
+# Save by Admin on 2024_02_28-16.04.56; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_02_28-23.21.51; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='Model-1-lowG', objectToCopy=mdb.models['Model-1-Bcs'])
+mdb.models['Model-1-lowG'].materials.changeKey(fromName='Matrix', toName=
+    'Matrix_HI')
+mdb.models['Model-1-lowG'].materials.changeKey(fromName='Matrix_HI', toName=
+    'Biopolymer_HI')
+mdb.models['Model-1-lowG'].Material(name='Biopolymer_VI')
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].Elastic(table=((136.0, 
+    68.0, 68.0), ), type=TRACTION)
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].QuadsDamageInitiation(
+    table=((1.76, 1.76, 1.76), ))
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].quadsDamageInitiation.DamageEvolution(
+    table=((7.4727e-07, ), ), type=ENERGY)
+mdb.models['Model-1-lowG'].materials.changeKey(fromName='Platelet', toName=
+    'Aragonite')
+mdb.models['Model-1-lowG'].sections.changeKey(fromName='Platelet', toName=
+    'Tablets')
+mdb.models['Model-1-lowG'].sections['Tablets'].setValues(material='Aragonite', 
+    thickness=None)
+mdb.models['Model-1-lowG'].sections.changeKey(fromName='Matrix', toName=
+    'Matrix_HI')
+mdb.models['Model-1-lowG'].sections['Matrix_HI'].setValues(material=
+    'Biopolymer_HI', outOfPlaneThickness=1.0, response=TRACTION_SEPARATION)
+mdb.models['Model-1-lowG'].CohesiveSection(initialThickness=2.7e-05, 
+    initialThicknessType=SPECIFY, material='Biopolymer_VI', name='Matrix_VI', 
+    outOfPlaneThickness=1.0, response=TRACTION_SEPARATION)
+mdb.models['Model-1-lowG'].parts['RVE'].sectionAssignments[0].setValues(
+    sectionName='Tablets')
+mdb.models['Model-1-lowG'].parts['RVE'].sectionAssignments[1].setValues(
+    sectionName='Matrix_HI')
+del mdb.models['Model-1-lowG'].parts['RVE'].sectionAssignments[1]
+mdb.models['Model-1-lowG'].parts['RVE'].Set(faces=
+    mdb.models['Model-1-lowG'].parts['RVE'].faces.getSequenceFromMask((
+    '[#140 ]', ), ), name='matrix_HI')
+mdb.models['Model-1-lowG'].parts['RVE'].SectionAssignment(offset=0.0, 
+    offsetField='', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1-lowG'].parts['RVE'].sets['matrix_HI'], sectionName=
+    'Matrix_HI', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1-lowG'].parts['RVE'].Set(faces=
+    mdb.models['Model-1-lowG'].parts['RVE'].faces.getSequenceFromMask((
+    '[#40a ]', ), ), name='matrix_VI')
+mdb.models['Model-1-lowG'].parts['RVE'].SectionAssignment(offset=0.0, 
+    offsetField='', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1-lowG'].parts['RVE'].sets['matrix_VI'], sectionName=
+    'Matrix_VI', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1-lowG'].materials['Biopolymer_HI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG'].sections['Matrix_HI'].setValues(material=
+    'Biopolymer_HI', outOfPlaneThickness=1.0, response=TRACTION_SEPARATION)
+mdb.models['Model-1-lowG'].sections['Matrix_VI'].setValues(material=
+    'Biopolymer_VI', outOfPlaneThickness=1.0, response=TRACTION_SEPARATION)
+mdb.models['Model-1-lowG'].rootAssembly.regenerate()
+mdb.models['Model-1-lowG'].rootAssembly.Set(name='PointB', nodes=
+    mdb.models['Model-1-lowG'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#2000 ]', ), ))
+mdb.models['Model-1-lowG'].DisplacementBC(amplitude=UNSET, createStepName=
+    'Step-1', distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None
+    , name='Point_B', region=
+    mdb.models['Model-1-lowG'].rootAssembly.sets['PointB'], u1=0.0, u2=0.0, 
+    ur3=UNSET)
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-1-lowG', modelPrint=OFF, 
+    multiprocessingMode=DEFAULT, name='Job-5_lowG', nodalOutputPrecision=SINGLE
+    , numCpus=2, numDomains=2, numGPUs=0, queue=None, resultsFormat=ODB, 
+    scratch='', type=ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
+mdb.jobs['Job-5_lowG'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-5_lowG']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 0, 'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following entries for set      SET-DUMMY-LR  are not found and are removed:      100000', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following entries for set      SET-DUMMY-TB  are not found and are removed:      200000', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following sets are empty and will be removed:      SET-DUMMY-LR, SET-DUMMY-TB', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following entries for set      DUMMY-LR-1-REFPT_  are not found and are removed:      100000', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following sets are empty and will be removed:      DUMMY-LR-1-REFPT_', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following entries for set      DUMMY-TB-1-REFPT_  are not found and are removed:      200000', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'The following sets are empty and will be removed:      DUMMY-TB-1-REFPT_', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'in keyword *EQUATION, file "Job-5_lowG.inp", line 24978: Unknown assembly set SET-DUMMY-LR', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'in keyword *EQUATION, file "Job-5_lowG.inp", line 24981: Unknown assembly set SET-DUMMY-TB', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'in keyword *BOUNDARY, file "Job-5_lowG.inp", line 25053: Unknown assembly node set SET-DUMMY-LR', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'in keyword *BOUNDARY, file "Job-5_lowG.inp", line 25056: Unknown assembly node set SET-DUMMY-TB', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'in keyword *NODEOUTPUT, file "Job-5_lowG.inp", line 25071: Unknown assembly set SET-DUMMY-LR', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'NODE SET ASSEMBLY_SET-DUMMY-LR HAS NOT BEEN DEFINED', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {'phase': BATCHPRE_PHASE, 
+    'message': 'NODE SET ASSEMBLY_SET-DUMMY-TB HAS NOT BEEN DEFINED', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(ERROR, {
+    'message': 'The executable pre.exe aborted with system error code 529697949. Please check the .dat, .msg, and .sta files for error messages if the files exist.  If there are no error messages and you cannot resolve the problem, please run the command "abaqus job=support information=support" to report and save your system information.  Use the same command to run Abaqus that you used when the problem occurred.  Please contact your local Abaqus support office and send them the input file, the file support.log which you just created, the executable name, and the error code.', 
+    'jobName': 'Job-5_lowG'})
+mdb.jobs['Job-5_lowG']._Message(JOB_ABORTED, {
+    'message': 'The executable pre.exe aborted with system error code 529697949. Please check the .dat, .msg, and .sta files for error messages if the files exist.  If there are no error messages and you cannot resolve the problem, please run the command "abaqus job=support information=support" to report and save your system information.  Use the same command to run Abaqus that you used when the problem occurred.  Please contact your local Abaqus support office and send them the input file, the file support.log which you just created, the executable name, and the error code.', 
+    'jobName': 'Job-5_lowG'})
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(31, 
+# Save by Admin on 2024_02_29-17.22.27; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_02_29-19.39.42; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(31, 
+# Save by Admin on 2024_02_29-23.01.46; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].steps['Step-1'].setValues(initialInc=0.001, 
+    maxInc=0.001, timePeriod=0.001)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(31, 
+# Save by Admin on 2024_03_01-17.19.25; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_01-22.59.15; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[19])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[16])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[22])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[20])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[1])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[5])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[0])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[4])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[10])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[9])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[11])
+mdb.models['Model-1'].rootAssembly.ReferencePoint(point=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].vertices[8])
+mdb.models['Model-1'].rootAssembly.Set(elements=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].elements.getSequenceFromMask(
+    mask=('[#0:366 #80000000 #ffff ]', ), ), name='element_vi_m')
+mdb.models['Model-1'].rootAssembly.Set(elements=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].elements.getSequenceFromMask(
+    mask=('[#0:62 #ff000000 ]', ), ), name='element_vi_t')
+mdb.models['Model-1'].rootAssembly.Set(elements=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].elements.getSequenceFromMask(
+    mask=('[#0:84 #ff ]', ), ), name='element_vi_b')
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].rootAssembly.Set(elements=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].elements.getSequenceFromMask(
+    mask=('[#0:62 #ff000000 #0:21 #ff #0:281 #80000000 #ffff ]', ), ), name=
+    'element_vi')
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(46, 
+# Save by Admin on 2024_03_02-13.28.17; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].steps['Step-1'].setValues(initialInc=0.01, maxInc=0.01, 
+    timePeriod=0.01)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(46, 
+# Save by Admin on 2024_03_02-17.13.16; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].rootAssembly.Set(name='node_plat', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#0:66 #400000 ]', ), ))
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+# Save by Admin on 2024_03_02-22.58.38; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG'].steps['Step-1'].setValues(initialInc=0.01, maxInc=
+    0.1, timePeriod=1.0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].rootAssembly.Set(elements=
+    mdb.models['Model-1-lowG'].rootAssembly.instances['RVE-1'].elements.getSequenceFromMask(
+    mask=('[#0:343 #800 ]', ), ), name='element_plat')
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].rootAssembly.Set(name='node_plat', nodes=
+    mdb.models['Model-1-lowG'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#0:66 #400000 ]', ), ))
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(54, 
+# Save by Admin on 2024_03_03-16.23.48; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].steps['Step-1'].setValues(initialInc=0.0001, maxInc=
+    0.01, timePeriod=0.02)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(54, 
+# Save by Admin on 2024_03_03-17.23.30; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG_tau'].steps['Step-1'].setValues(initialInc=0.01, 
+    maxInc=0.1, timePeriod=1.0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(31, 
+# Save by Admin on 2024_03_03-23.10.38; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].steps['Step-1'].setValues(timePeriod=0.5)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_05-12.29.48; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].steps['Step-1'].setValues(maxInc=0.01, timePeriod=0.01)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_05-20.29.23; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_05-22.55.03; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1_SBC'].materials['Matrix'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1_SBC'].rootAssembly.Set(edges=
+    mdb.models['Model-1_SBC'].rootAssembly.instances['RVE-1'].edges.getSequenceFromMask(
+    ('[#14240100 ]', ), ), name='Master_R_D')
+mdb.models['Model-1_SBC'].fieldOutputRequests['F-Output-2'].setValues(rebar=
+    EXCLUDE, region=mdb.models['Model-1_SBC'].rootAssembly.sets['Master_R_D'], 
+    sectionPoints=DEFAULT, variables=('E', 'RF', 'S', 'SDEG', 'U'))
+mdb.models['Model-1_SBC'].HistoryOutputRequest(createStepName='Step-1', name=
+    'H-Output-2', rebar=EXCLUDE, region=
+    mdb.models['Model-1_SBC'].rootAssembly.sets['Master_R_D'], sectionPoints=
+    DEFAULT, variables=('U1', 'RF1', 'SDEG'))
+mdb.models['Model-1_SBC'].rootAssembly.Set(edges=
+    mdb.models['Model-1_SBC'].rootAssembly.instances['RVE-1'].edges.getSequenceFromMask(
+    ('[#80408004 #2 ]', ), ), name='LE')
+mdb.models['Model-1_SBC'].rootAssembly.Set(edges=
+    mdb.models['Model-1_SBC'].rootAssembly.instances['RVE-1'].edges.getSequenceFromMask(
+    ('[#222 ]', ), ), name='TE')
+mdb.models['Model-1_SBC'].rootAssembly.Set(edges=
+    mdb.models['Model-1_SBC'].rootAssembly.instances['RVE-1'].edges.getSequenceFromMask(
+    ('[#32000 ]', ), ), name='BE')
+mdb.models['Model-1_SBC'].YsymmBC(createStepName='Step-1', localCsys=None, 
+    name='L', region=mdb.models['Model-1_SBC'].rootAssembly.sets['BE'])
+del mdb.models['Model-1_SBC'].boundaryConditions['L']
+mdb.models['Model-1_SBC'].YsymmBC(createStepName='Step-1', localCsys=None, 
+    name='T', region=mdb.models['Model-1_SBC'].rootAssembly.sets['TE'])
+mdb.models['Model-1_SBC'].YsymmBC(createStepName='Step-1', localCsys=None, 
+    name='B', region=mdb.models['Model-1_SBC'].rootAssembly.sets['BE'])
+mdb.models['Model-1_SBC'].XsymmBC(createStepName='Step-1', localCsys=None, 
+    name='L', region=mdb.models['Model-1_SBC'].rootAssembly.sets['LE'])
+mdb.models['Model-1_SBC'].DisplacementBC(amplitude=UNSET, createStepName=
+    'Step-1', distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None
+    , name='RD', region=
+    mdb.models['Model-1_SBC'].rootAssembly.sets['Master_R_D'], u1=0.00169, u2=
+    UNSET, ur3=UNSET)
+mdb.models['Model-1_SBC'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1_SBC'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_SBC'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1_SBC'].keywordBlock.setValues(edited=0)
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-1_SBC', modelPrint=OFF, 
+    multiprocessingMode=DEFAULT, name='Job-8_SBC', nodalOutputPrecision=SINGLE, 
+    numCpus=2, numDomains=2, numGPUs=0, queue=None, resultsFormat=ODB, scratch=
+    '', type=ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
+mdb.jobs['Job-8_SBC'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\Temp\\Job-8_SBC.odb', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 9444, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.0, 'attempts': 0, 
+    'timeIncrement': 0.01, 'increment': 0, 'stepTime': 0.0, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 0, 
+    'phase': STANDARD_PHASE, 'equilibrium': 0})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'Job-8_SBC', 'memory': 53.0})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.01, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 3, 
+    'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.02, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 4, 
+    'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 2, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.035, 'attempts': 1, 
+    'timeIncrement': 0.015, 'increment': 3, 'stepTime': 0.035, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 3, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.0575, 'attempts': 1, 
+    'timeIncrement': 0.0225, 'increment': 4, 'stepTime': 0.0575, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 4, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.09125, 'attempts': 1, 
+    'timeIncrement': 0.03375, 'increment': 5, 'stepTime': 0.09125, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 5, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.141875, 'attempts': 1, 
+    'timeIncrement': 0.050625, 'increment': 6, 'stepTime': 0.141875, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 6, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.141875, 
+    'attempts': ' 1U', 'timeIncrement': 0.0759375, 'increment': 7, 
+    'stepTime': 0.141875, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 5, 'phase': STANDARD_PHASE, 'equilibrium': 5})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.160859375, 
+    'attempts': 2, 'timeIncrement': 0.018984375, 'increment': 7, 
+    'stepTime': 0.160859375, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 7, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.1893359375, 
+    'attempts': 1, 'timeIncrement': 0.0284765625, 'increment': 8, 
+    'stepTime': 0.1893359375, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 8, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.23205078125, 
+    'attempts': 1, 'timeIncrement': 0.04271484375, 'increment': 9, 
+    'stepTime': 0.23205078125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 9, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.296123046875, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 10, 
+    'stepTime': 0.296123046875, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 5, 'phase': STANDARD_PHASE, 'equilibrium': 5})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 10, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.3601953125, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 11, 
+    'stepTime': 0.3601953125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 11, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.424267578125, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 12, 
+    'stepTime': 0.424267578125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 12, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.5203759765625, 
+    'attempts': 1, 'timeIncrement': 0.0961083984375, 'increment': 13, 
+    'stepTime': 0.5203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 13, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.6203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 14, 
+    'stepTime': 0.6203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 14, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.7203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 15, 
+    'stepTime': 0.7203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 15, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.8203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 16, 
+    'stepTime': 0.8203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 16, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.9203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 17, 
+    'stepTime': 0.9203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 17, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 18, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 1.0, 'attempts': 1, 
+    'timeIncrement': 0.0796240234375001, 'increment': 18, 'stepTime': 1.0, 
+    'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 3, 
+    'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(JOB_COMPLETED, {
+    'time': 'Wed Mar 06 10:04:25 2024', 'jobName': 'Job-8_SBC'})
+mdb.models['Model-1_SBC'].fieldOutputRequests['F-Output-2'].setValues(
+    exteriorOnly=OFF, rebar=EXCLUDE, region=MODEL, sectionPoints=DEFAULT, 
+    variables=('E', 'RF', 'S', 'SDEG', 'U'))
+mdb.jobs['Job-8_SBC'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\Temp\\Job-8_SBC.odb', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 14880, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.0, 'attempts': 0, 
+    'timeIncrement': 0.01, 'increment': 0, 'stepTime': 0.0, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 0, 
+    'phase': STANDARD_PHASE, 'equilibrium': 0})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'Job-8_SBC', 'memory': 53.0})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.01, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 3, 
+    'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.02, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 2, 'stepTime': 0.02, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 4, 
+    'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 2, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.035, 'attempts': 1, 
+    'timeIncrement': 0.015, 'increment': 3, 'stepTime': 0.035, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 3, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.0575, 'attempts': 1, 
+    'timeIncrement': 0.0225, 'increment': 4, 'stepTime': 0.0575, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 4, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.09125, 'attempts': 1, 
+    'timeIncrement': 0.03375, 'increment': 5, 'stepTime': 0.09125, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 5, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.141875, 'attempts': 1, 
+    'timeIncrement': 0.050625, 'increment': 6, 'stepTime': 0.141875, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 2, 
+    'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 6, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.141875, 
+    'attempts': ' 1U', 'timeIncrement': 0.0759375, 'increment': 7, 
+    'stepTime': 0.141875, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 5, 'phase': STANDARD_PHASE, 'equilibrium': 5})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.160859375, 
+    'attempts': 2, 'timeIncrement': 0.018984375, 'increment': 7, 
+    'stepTime': 0.160859375, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 7, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.1893359375, 
+    'attempts': 1, 'timeIncrement': 0.0284765625, 'increment': 8, 
+    'stepTime': 0.1893359375, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 8, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.23205078125, 
+    'attempts': 1, 'timeIncrement': 0.04271484375, 'increment': 9, 
+    'stepTime': 0.23205078125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 2, 'phase': STANDARD_PHASE, 'equilibrium': 2})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 9, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.296123046875, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 10, 
+    'stepTime': 0.296123046875, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 5, 'phase': STANDARD_PHASE, 'equilibrium': 5})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 10, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.3601953125, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 11, 
+    'stepTime': 0.3601953125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 11, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.424267578125, 
+    'attempts': 1, 'timeIncrement': 0.064072265625, 'increment': 12, 
+    'stepTime': 0.424267578125, 'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 
+    'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 12, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.5203759765625, 
+    'attempts': 1, 'timeIncrement': 0.0961083984375, 'increment': 13, 
+    'stepTime': 0.5203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 13, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.6203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 14, 
+    'stepTime': 0.6203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 4, 'phase': STANDARD_PHASE, 'equilibrium': 4})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 14, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.7203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 15, 
+    'stepTime': 0.7203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 15, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.8203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 16, 
+    'stepTime': 0.8203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 16, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.9203759765625, 
+    'attempts': 1, 'timeIncrement': 0.1, 'increment': 17, 
+    'stepTime': 0.9203759765625, 'step': 1, 'jobName': 'Job-8_SBC', 
+    'severe': 0, 'iterations': 3, 'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 17, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 18, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 1.0, 'attempts': 1, 
+    'timeIncrement': 0.0796240234375001, 'increment': 18, 'stepTime': 1.0, 
+    'step': 1, 'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 3, 
+    'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(JOB_COMPLETED, {
+    'time': 'Wed Mar 06 10:14:43 2024', 'jobName': 'Job-8_SBC'})
+mdb.models['Model-1_SBC'].steps['Step-1'].setValues(maxInc=0.01, timePeriod=
+    0.01)
+mdb.models['Model-1_SBC'].boundaryConditions['RD'].setValues(u1=1.69e-05)
+mdb.jobs['Job-8_SBC'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'OUTPUT REQUEST SDEG IS NOT AVAILABLE FOR THE MATERIAL FOR ELEMENT TYPE CPE4R', 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'C:\\Temp\\Job-8_SBC.odb', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'DESKTOP-TQCEBV4', 'handle': 19552, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.0, 'attempts': 0, 
+    'timeIncrement': 0.01, 'increment': 0, 'stepTime': 0.0, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 0, 
+    'phase': STANDARD_PHASE, 'equilibrium': 0})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'Job-8_SBC', 'memory': 53.0})
+mdb.jobs['Job-8_SBC']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(STATUS, {'totalTime': 0.01, 'attempts': 1, 
+    'timeIncrement': 0.01, 'increment': 1, 'stepTime': 0.01, 'step': 1, 
+    'jobName': 'Job-8_SBC', 'severe': 0, 'iterations': 3, 
+    'phase': STANDARD_PHASE, 'equilibrium': 3})
+mdb.jobs['Job-8_SBC']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-8_SBC'})
+mdb.jobs['Job-8_SBC']._Message(JOB_COMPLETED, {
+    'time': 'Wed Mar 06 10:25:06 2024', 'jobName': 'Job-8_SBC'})
+# Save by Admin on 2024_03_06-14.53.03; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_07-13.18.59; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].steps['Step-1'].setValues(initialInc=0.02, maxInc=0.02, 
+    timePeriod=0.02)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_08-20.08.56; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].steps['Step-1'].setValues(initialInc=0.0001, 
+    timePeriod=0.12)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(54, 
+# Save by Admin on 2024_03_08-23.42.51; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].steps['Step-1'].setValues(initialInc=0.01, timePeriod=
+    1.0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_11-20.35.24; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='Model-1_fullplat', objectToCopy=mdb.models['Model-1'])
+mdb.models['Model-1_fullplat'].rootAssembly.LinearInstancePattern(direction1=(
+    1.0, 0.0, 0.0), direction2=(0.0, 1.0, 0.0), instanceList=('RVE-1', ), 
+    number1=2, number2=1, spacing1=0.009054, spacing2=0.0009567)
+mdb.models['Model-1_fullplat'].rootAssembly.suppressFeatures(('RP-1', 'RP-2', 
+    'RP-3', 'RP-4', 'RP-5', 'RP-6', 'RP-7', 'RP-8', 'RP-9', 'RP-10', 'RP-11', 
+    'RP-12', 'RP-13', 'RP-14', 'RP-15', 'RP-16'))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Left', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#811008 #0:7 #fe000000 #0:21 #1fc00000 #0:35 #3fffc000 ]', ), ))
+mdb.models['Model-1_fullplat'].rootAssembly.suppressFeatures(('RVE-1', 
+    'RVE-1-lin-2-1'))
+mdb.models['Model-1_fullplat'].rootAssembly.resumeFeatures(('RVE-1', 
+    'RVE-1-lin-2-1'))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Bottom', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#6600 #0:29 #e0000000 #ffffffff:10 #3ff ]', ), ))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Right', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#288040 #0:18 #7f00000 #0:21 #1fc00 #0:20 #7fff800 ]', ), ))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Top', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=(
+    '[#800000a6 #ffffffff:7 #1ffffff #0:10 #f8000000 #ffffffff:2 #3fff ]', ), 
+    ))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Bottom', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=('[#6600 #0:29 #e0000000 #ffffffff:10 #3ff ]', ), )+\
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1-lin-2-1'].nodes.getSequenceFromMask(
+    mask=('[#4600 #0:29 #e0000000 #ffffffff:10 #3ff ]', ), ))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Top', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1'].nodes.getSequenceFromMask(
+    mask=(
+    '[#800000a6 #ffffffff:7 #1ffffff #0:10 #f8000000 #ffffffff:2 #3fff ]', ), 
+    )+\
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1-lin-2-1'].nodes.getSequenceFromMask(
+    mask=(
+    '[#800000a2 #ffffffff:7 #1ffffff #0:10 #f8000000 #ffffffff:2 #3fff ]', ), 
+    ))
+mdb.models['Model-1_fullplat'].rootAssembly.Set(name='Right', nodes=
+    mdb.models['Model-1_fullplat'].rootAssembly.instances['RVE-1-lin-2-1'].nodes.getSequenceFromMask(
+    mask=('[#288040 #0:18 #7f00000 #0:21 #1fc00 #0:20 #7fff800 ]', ), ))
+mdb.models['Model-1_fullplat'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fullplat'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fullplat'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fullplat'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fullplat'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fullplat'].keywordBlock.insert(37, 
+# Save by Admin on 2024_03_15-10.40.51; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+# Save by Admin on 2024_03_15-15.32.12; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_18-22.51.10; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].materials['Matrix'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1'].steps['Step-1'].setValues(initialInc=0.02, maxInc=0.02, 
+    timePeriod=0.02)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_19-13.01.39; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].steps['Step-1'].setValues(initialInc=0.0001, maxInc=
+    0.0001, timePeriod=0.0001)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_19-23.05.55; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_20-22.55.12; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.Model(name='Model-1_fail_stend_pt', objectToCopy=mdb.models['Model-1'])
+mdb.models['Model-1_fail_stend_pt'].materials['Matrix'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1_fail_stend_pt'].steps['Step-1'].setValues(nlgeom=OFF)
+mdb.models['Model-1_fail_stend_pt'].steps['Step-1'].setValues(initialInc=1e-05, 
+    maxInc=0.0001, nlgeom=ON, timePeriod=0.0001)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_25-22.51.55; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1_fail_stend_pt'].steps['Step-1'].setValues(initialInc=1e-05, 
+    maxInc=0.001, timePeriod=0.001)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_26-10.56.23; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1_fail_stend_pt'].steps['Step-1'].setValues(maxInc=0.0012, 
+    timePeriod=0.0012)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_26-12.40.23; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_27-10.55.57; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_28-11.30.28; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1_fail_stend_pt'].steps['Step-1'].setValues(initialInc=0.0001
+    , maxInc=0.1, timePeriod=1.0)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fail_stend_pt'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_31-17.23.11; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1_fail_stend_pt1'].steps['Step-1'].setValues(initialInc=
+    0.0001, maxInc=0.05, timePeriod=0.5)
+mdb.models['Model-1_fail_stend_pt1'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1_fail_stend_pt1'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1_fail_stend_pt1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1_fail_stend_pt1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_03_31-22.58.50; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_03_31-23.14.19; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_04_01-11.37.39; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_04_02-12.06.23; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].materials['Biopolymer_HI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG'].materials['Biopolymer_HI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG'].materials['Biopolymer_VI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG'].steps['Step-1'].suppress()
+mdb.models['Model-1-lowG'].steps['Step-1'].resume()
+mdb.models['Model-1-lowG'].steps['Step-1'].suppress()
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(54, 
+# Save by Admin on 2024_04_12-23.03.31; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-lowG'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG'].keywordBlock.insert(54, 
+# Save by Admin on 2024_04_13-13.31.58; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_04_13-22.53.47; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_04_13-23.08.11; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+# Save by Admin on 2024_04_17-15.57.18; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['Model-1'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1'].keywordBlock.insert(48, 
+# Save by Admin on 2024_05_08-23.01.54; build 6.14-5 2015_08_18-20.07.49 135153
+# Save by Admin on 2024_05_09-01.42.04; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-G_tau'].materials['Matrix'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG_tau'].materials['Biopolymer_HI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-lowG_tau'].materials['Biopolymer_VI'].quadsDamageInitiation.damageEvolution.setValues(
+    type=ENERGY)
+mdb.models['Model-1-G_tau'].steps['Step-1'].setValues(nlgeom=OFF)
+mdb.models['Model-1-G_tau'].steps['Step-1'].setValues(initialInc=0.0001, 
+    maxInc=0.0001, timePeriod=0.001)
+mdb.models['Model-1-G_tau'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-G_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-G_tau'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-G_tau'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-G_tau'].keywordBlock.insert(24, 
+# Save by Admin on 2024_07_18-15.48.10; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-lowG_tau'].steps['Step-1'].setValues(nlgeom=OFF)
+mdb.models['Model-1-lowG_tau'].steps['Step-1'].setValues(initialInc=0.0001, 
+    maxInc=0.0001, timePeriod=0.001)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-lowG_tau'].keywordBlock.synchVersions(
+    storeNodesAndElements=False)
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(19, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-lowG_tau'].keywordBlock.insert(31, 
+# Save by Admin on 2024_08_27-16.51.47; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-1-Elastic'].steps['Step-1'].setValues(maxInc=0.01)
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Elastic'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Elastic'].keywordBlock.setValues(edited=0)
+mdb.models['Model-1-Elastic'].steps['Step-1'].suppress()
+mdb.models['Model-1-Elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['Model-1-Elastic'].keywordBlock.insert(12, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['Model-1-Elastic'].keywordBlock.insert(23, 
+# Save by SHUBHAM on 2024_09_23-19.13.58; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['2708-G_elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['2708-G_elastic'].keywordBlock.setValues(edited=0)
+mdb.models['2708-G_elastic'].keywordBlock.synchVersions(storeNodesAndElements=
+    False)
+mdb.models['2708-G_elastic'].keywordBlock.insert(12, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['2708-G_elastic'].keywordBlock.insert(23, 
+# Save by SHUBHAM on 2024_10_09-15.57.44; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['2708-G'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['2708-G'].keywordBlock.setValues(edited=0)
+mdb.models['2708-G'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['2708-G'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['2708-G'].keywordBlock.insert(24, 
+# Save by SHUBHAM on 2024_11_12-16.40.18; build 6.14-5 2015_08_18-20.07.49 135153
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['2708-G'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['2708-G'].keywordBlock.setValues(edited=0)
+mdb.models['2708-G'].keywordBlock.synchVersions(storeNodesAndElements=False)
+mdb.models['2708-G'].keywordBlock.insert(13, 
+    '\n** \n*Part, name=dummy-LR  \n*End Part            \n**                    \n*Part, name=dummy-TB   \n*End Part               \n**                         \n**')
+mdb.models['2708-G'].keywordBlock.insert(29, 
+# Save by SHUBHAM on 2024_11_14-22.26.07; build 6.14-5 2015_08_18-20.07.49 135153
